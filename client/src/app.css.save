@@ -1,0 +1,42 @@
+  GNU nano 4.8                                                                                 app.css                                                                                            
+.App {
+    text-align: center;
+}
+
+.App-header {
+    background-color: #282c34;
+    color: white;
+    padding: 20px;
+}
+
+.App-nav {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.App-nav a {
+    text-decoration: none;
+    color: #61dafb;
+    font-weight: bold;
+}
+
+.App-main {
+    padding: 20px;
+    text-align: left;
+}
+
+.App-main h2 {
+    color: #282c34;
+}
+
+.App-footer {
+    background-color: #282c34;
+    color: white;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}

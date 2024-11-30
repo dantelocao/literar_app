@@ -15,15 +15,15 @@ function App() {
     autoplaySpeed: 3000,
     responsive: [
       {
-        breakpoint: 1024, // Tablets e telas menores
+        breakpoint: 1024, // Tablets
         settings: {
-          slidesToShow: 2, // Mostrar 2 slides
+          slidesToShow: 2,
         },
       },
       {
-        breakpoint: 768, // Dispositivos móveis
+        breakpoint: 768, // Smartphones grandes
         settings: {
-          slidesToShow: 1, // Mostrar 1 slide
+          slidesToShow: 1,
         },
       },
     ],
@@ -33,14 +33,14 @@ function App() {
     <div className="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
       {/* Cabeçalho */}
       <header className="bg-indigo-600 text-white p-4 shadow-md">
-        <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center">
-          <h1 className="text-xl sm:text-2xl font-bold text-center sm:text-left">Literar</h1>
-          <nav className="mt-2 sm:mt-0">
-            <ul className="flex flex-wrap justify-center sm:justify-end space-x-4">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+          <h1 className="text-xl md:text-2xl font-bold text-center md:text-left">Literar</h1>
+          <nav className="mt-2 md:mt-0">
+            <ul className="flex flex-wrap justify-center md:justify-end space-x-2 md:space-x-4">
               <li>
                 <a
                   href="#home"
-                  className="px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-medium transition"
+                  className="px-3 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-medium transition text-sm md:text-base"
                 >
                   Home
                 </a>
@@ -48,7 +48,7 @@ function App() {
               <li>
                 <a
                   href="#library"
-                  className="px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-medium transition"
+                  className="px-3 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-medium transition text-sm md:text-base"
                 >
                   Biblioteca
                 </a>
@@ -56,7 +56,7 @@ function App() {
               <li>
                 <a
                   href="#community"
-                  className="px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-medium transition"
+                  className="px-3 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-medium transition text-sm md:text-base"
                 >
                   Comunidade
                 </a>
@@ -64,7 +64,7 @@ function App() {
               <li>
                 <a
                   href="#profile"
-                  className="px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-medium transition"
+                  className="px-3 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-medium transition text-sm md:text-base"
                 >
                   Perfil
                 </a>
@@ -155,7 +155,7 @@ function App() {
       </main>
 
       {/* Rodapé */}
-      <footer className="bg-gray-800 text-white text-center p-4">
+      <footer className="bg-gray-800 text-white text-center p-4 text-sm">
         <p>© 2024 Literar. Todos os direitos reservados.</p>
       </footer>
     </div>
@@ -163,4 +163,3 @@ function App() {
 }
 
 export default App;
-
