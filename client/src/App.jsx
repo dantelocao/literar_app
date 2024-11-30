@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick'; // Importação do react-slick
-import './App.css';
+import './app.css';
 import 'slick-carousel/slick/slick.css'; // Estilos do carrossel
 import 'slick-carousel/slick/slick-theme.css';
 
