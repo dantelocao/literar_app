@@ -1,50 +1,37 @@
 import React from 'react';
+import CriarPost from '../perfilcomponents/Creationpost.jsx';
+import Post from '../perfilcomponents/Posts.jsx';
 
-const Perfil = ({ perfil, livros }) => {
+const Perfil = ({ perfil }) => {
   return (
     <main className="container mx-auto p-8">
       {/* Seção de Informações do Perfil */}
-      <section className="bg-gray-100 shadow-lg p-6 rounded-xl mb-12">
-        <div className="flex flex-col md:flex-row items-center justify-center md:justify-start space-y-4 md:space-y-0 md:space-x-8">
-          {/* Imagem de Avatar */}
-          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-indigo-500">
-            <img 
-              src={perfil.avatar} 
-              alt="Avatar" 
-              className="w-full h-full object-cover" 
-            />
-          </div>
-
-          {/* Detalhes do Perfil */}
-          <div className="text-center md:text-left">
-            <h2 className="text-4xl font-bold text-gray-900">{perfil.nome}</h2>
-            <p className="text-lg text-gray-600 mt-2">{perfil.email}</p>
-            <p className="text-sm text-gray-500 mt-2">{perfil.bio}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Seção dos Livros */}
-      <section>
-        <h2 className="text-2xl font-bold mb-8 text-gray-900">Meus Livros</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-          {livros.map((livro, index) => (
-            <div 
-              key={index} 
-              className="bg-white shadow-xl rounded-lg p-4 text-center transition-transform transform hover:scale-105"
-            >
-              <img 
-                src={livro.imagem} 
-                alt={livro.titulo} 
-                className="h-40 w-auto mx-auto object-cover rounded-md mb-4"
-              />
-              <h3 className="font-semibold text-lg text-gray-800">{livro.titulo}</h3>
-              <p className="text-sm text-gray-600">{livro.autor}</p>
-              <span className="text-xs text-indigo-600 font-medium">{livro.status}</span>
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+            <div className="flex items-center bg-white shadow-md rounded-lg p-6 max-w-lg mx-auto">
+                <div className="flex-shrink-0">
+                    <img
+                        className="h-24 w-24 rounded-full"
+                        src="https://via.placeholder.com/150"
+                        alt="Imagem do Usuário"
+                    />
+                </div>
+                <div className="ml-4">
+                    <h1 className="text-xl font-semibold">Nome do Usuário</h1>
+                    <p className="text-gray-600"><strong>Email:</strong> usuario@example.com</p>
+                    <p className="text-gray-600"><strong>Telefone:</strong> (11) 91234-5678</p>
+                    <p className="text-gray-600"><strong>Bio:</strong> Aqui vai uma breve descrição sobre o usuário. Pode incluir interesses, hobbies, etc.</p>
+                </div>
             </div>
-          ))}
         </div>
+
+      {/* Seção dos Posts */}
+      <section>
+        <Post />
+        <Post />
+        <Post />
       </section>
+
+      <CriarPost />
     </main>
   );
 };
