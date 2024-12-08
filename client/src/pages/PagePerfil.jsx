@@ -6,18 +6,10 @@ import Perfil from '../components/perfil/Perfil.jsx';
 
 function PagePerfil() {
 
-    const perfil = {
-        nome: "João da Silva",
-        email: "joao@email.com",
-        bio: "Sou um apaixonado por livros e literatura, sempre em busca de novas histórias para ler e compartilhar.",
-        avatar: "https://via.placeholder.com/150"
-      };
-  
-    
       return (
         <>
           <Header />
-          <Perfil perfil={perfil} />
+          <Perfil/>
           <Footer />
         </>
       );

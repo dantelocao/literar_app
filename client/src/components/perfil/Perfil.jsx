@@ -1,6 +1,6 @@
 import React from 'react';
-import CriarPost from '../perfilcomponents/Creationpost.jsx';
-import Post from '../perfilcomponents/Posts.jsx';
+import CriarPost from '../creationPost/Creationpost.jsx';
+import Post from '../creationPost/Posts.jsx';
 
 const Perfil = ({ perfil }) => {
   return (
@@ -26,9 +26,7 @@ const Perfil = ({ perfil }) => {
 
       {/* Seção dos Posts */}
       <section>
-        <Post />
-        <Post />
-        <Post />
+
       </section>
 
       <CriarPost />
