@@ -54,53 +54,51 @@ const CriarPost = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-      {/* Título da página */}
-      <h1 className="text-4xl font-bold text-center text-indigo-700 mb-8">
-        Criar um Novo Post
-      </h1>
-
-      {/* Dropdown para escolher os livros */}
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">Escolha os Livros</h2>
-
-      {/* Botão para abrir o dropdown */}
-      <div className="relative">
-        <button
-          onClick={() => setDropdownAberto(!dropdownAberto)}
-          className="w-full h-12 border border-gray-300 rounded-lg p-4 text-lg focus:ring-2 focus:ring-indigo-500 text-left"
-        >
-          {livrosSelecionados.length > 0 ? `${livrosSelecionados.length} Livros Selecionados` : "Selecione os Livros"}
-        </button>
-
-        {/* Dropdown */}
-        {dropdownAberto && (
-          <div className="absolute left-0 w-full mt-2 bg-white shadow-lg border border-gray-300 rounded-lg z-10">
-            <div className="max-h-60 overflow-y-auto p-4">
-              {livrosUsuario.map((livro) => (
-                <div key={livro._id} className="flex items-center space-x-4 mb-4">
-                  <input
-                    type="checkbox"
-                    id={`livro-${livro._id}`}
-                    value={livro._id}
-                    onChange={(e) => handleLivroSelection(e, livro._id)}
-                    checked={livrosSelecionados.includes(livro._id)}
-                    className="w-5 h-5 text-indigo-600 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                  />
-                  <label htmlFor={`livro-${livro._id}`} className="flex items-center space-x-2">
-                    <div className="w-16 h-16 bg-gray-200 border border-gray-300 rounded-lg flex items-center justify-center">
-                      <span className="text-center text-sm">{livro.bookName}</span>
-                    </div>
-                  </label>
-                </div>
-              ))}
+    <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg space-y-6">
+      {/* Título */}
+      <h1 className="text-2xl font-bold text-center text-indigo-700">Novo Post</h1>
+  
+      {/* Seleção de Livros */}
+      <div>
+        <label className="text-lg font-semibold text-gray-800 mb-2 block">Escolha Livros</label>
+        <div className="relative">
+          <button
+            onClick={() => setDropdownAberto(!dropdownAberto)}
+            className="w-full h-10 border border-gray-300 rounded-lg p-2 text-gray-700 focus:ring-2 focus:ring-indigo-500 text-left"
+          >
+            {livrosSelecionados.length > 0
+              ? `${livrosSelecionados.length} Livros Selecionados`
+              : "Selecione os Livros"}
+          </button>
+  
+          {/* Dropdown */}
+          {dropdownAberto && (
+            <div className="absolute left-0 w-full mt-2 bg-white shadow-lg border border-gray-300 rounded-lg z-10">
+              <div className="max-h-40 overflow-y-auto p-2">
+                {livrosUsuario.map((livro) => (
+                  <div key={livro._id} className="flex items-center space-x-2 mb-2">
+                    <input
+                      type="checkbox"
+                      id={`livro-${livro._id}`}
+                      value={livro._id}
+                      onChange={(e) => handleLivroSelection(e, livro._id)}
+                      checked={livrosSelecionados.includes(livro._id)}
+                      className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-2 focus:ring-indigo-500"
+                    />
+                    <label htmlFor={`livro-${livro._id}`} className="text-gray-700">
+                      {livro.bookName}
+                    </label>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-
-      {/* Opções de privacidade */}
-      <div className="mb-6">
-        <h3 className="text-xl font-semibold text-gray-800 mb-3">Privacidade do Post</h3>
+  
+      {/* Privacidade */}
+      <div>
+        <h3 className="text-lg font-semibold text-gray-800 mb-2">Privacidade</h3>
         <div className="flex items-center space-x-4">
           <label className="text-gray-700">
             <input
@@ -108,7 +106,7 @@ const CriarPost = () => {
               value="todos"
               checked={privacidade === 'todos'}
               onChange={() => setPrivacidade('todos')}
-              className="mr-2"
+              className="mr-1"
             />
             Todos
           </label>
@@ -118,24 +116,25 @@ const CriarPost = () => {
               value="privado"
               checked={privacidade === 'privado'}
               onChange={() => setPrivacidade('privado')}
-              className="mr-2"
+              className="mr-1"
             />
             Privado
           </label>
         </div>
       </div>
-
-      {/* Botão para criar o post */}
+  
+      {/* Botão de Submissão */}
       <div className="flex justify-center">
         <button
           onClick={handleSubmit}
-          className="bg-indigo-600 text-white text-lg py-2 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+          className="bg-indigo-600 text-white text-sm py-2 px-4 rounded hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
         >
           Criar Post
         </button>
       </div>
     </div>
   );
+  
 };
 
 export default CriarPost;

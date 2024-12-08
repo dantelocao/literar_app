@@ -33,7 +33,10 @@ const Header = () => {
             </a>
           </li>
           <li>
-            <Link to="/profile">Perfil</Link>
+            <Link to="/profile"
+            className="px-3 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-medium transition text-sm md:text-base"
+            >
+            Perfil</Link>
 
           </li>
         </ul>

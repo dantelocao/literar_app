@@ -4,6 +4,10 @@ module.exports = {
         "./src/components/booksFeed/Biblioteca.jsx",
         "./src/components/auth/Login.jsx",
         "./src/components/auth/Register.jsx",
+        "./src/components/creationPost/Posts.jsx",
+        "./src/components/creationPost/Creationpost.jsx",
+        "./src/components/perfil/Perfil.jsx"
+
 
     ],
     theme: {
