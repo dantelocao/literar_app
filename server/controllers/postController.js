@@ -95,7 +95,7 @@ export const getPostController = async (req, res) => {
 
 export const getTimelinePostController = async (req, res) => {
     try {
-        const timelinePosts = await getTimelinePosts(req.body); 
+        const timelinePosts = await getTimelinePosts(req.params); 
         res.status(200).json({
             timelinePosts,
             message: "timeline post fetched successfully"

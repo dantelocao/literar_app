@@ -66,16 +66,16 @@ export const getPost = async (params, body) => {
     }
 };
 
-export const getTimelinePosts = async (body) => {
+export const getTimelinePosts = async (params) => {
     try {
-        const currentUser = await userModel.findById(body.userId);
+        const currentUser = await userModel.findById(params.userId);
         const userPosts = await postModel.find({userId: currentUser._id});
         const timelinePosts = await Promise.all(
             currentUser.followings.map((friendId) => {
                 return postModel.find({ userId: friendId });
             })
         );
-        return userPosts.concat({ ...timelinePosts });
+        return timelinePosts
 
     } catch (error) {
         throw error;

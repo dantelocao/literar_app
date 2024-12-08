@@ -8,12 +8,15 @@ const postSchema = new Schema(
         required: true,
     },
 
-    desc: {
+    userName: {
         type: String,
+        required: true,
     },
 
-    img: {
+
+    desc: {
         type: String,
+        required: true,
     },
 
     likes: {

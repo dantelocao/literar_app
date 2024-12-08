@@ -21,7 +21,7 @@ router.put("/like-post/:id", LikeAndDislikeController);
 // get post
 router.get("/get-post/:id", getPostController);
 // get timelineposts
-router.get("/get-timeline-posts", getTimelinePostController);
+router.get("/get-timeline-posts/:userId", getTimelinePostController);
 
 
 export default router;

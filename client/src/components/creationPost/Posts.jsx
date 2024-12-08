@@ -4,7 +4,12 @@ import 'slick-carousel/slick/slick.css'; // Estilos do carrossel
 import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom'; // Importando o Link para a navegação
 
-const Post = () => {
+const Post = ({ post }) => {
+  console.log(post._id)
+  console.log(post.userName)
+  console.log(post.desc)
+
+
   const settings = {
     dots: true,
     infinite: true,
@@ -38,7 +43,7 @@ const Post = () => {
     <section id="home" className="mb-10">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl sm:text-2xl font-semibold text-center sm:text-left">
-          Post de TESTE
+          Post de {post.userName}
         </h2>
         <div className="flex space-x-2">
           <Link
@@ -57,7 +62,7 @@ const Post = () => {
       </div>
 
       <p className="text-gray-700 text-center sm:text-left">
-        DESCRIÇÃO POST
+        {post.desc}
       </p>
 
       <Slider {...settings} className="mt-6">
