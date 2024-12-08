@@ -11,3 +11,16 @@ export const createBook = async (body) => {
         throw error;
     }
 };
+
+
+// Função para pegar todos os livros do banco de dados
+export const getAllBooks = async () => {
+    try {
+        const livros = await bookModel.find(); // Recupera todos os livros da coleção
+        return livros;
+    } catch (error) {
+        throw error;
+    }
+};
+
+

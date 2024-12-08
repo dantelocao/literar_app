@@ -32,6 +32,8 @@ const Perfil = ({ perfil }) => {
       </section>
 
       <CriarPost />
+
+      
     </main>
   );
 };
