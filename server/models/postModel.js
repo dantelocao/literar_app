@@ -20,6 +20,18 @@ const postSchema = new Schema(
         type: Array,
         default: [],
     },
+
+    books: {
+        type: Array,
+        default: [],
+    },
+
+    shareWith: {
+        type: Array,
+        default: [],
+    },
+
+
     },
     {
         timestamps: true,
