@@ -9,11 +9,12 @@ const Books = () => {
   // Simula a busca de dados (substituir com sua API real)
   useEffect(() => {
     const fetchBooks = async () => {
-      // Mock de 50 livros para simular a lista
+      // Mock de 50 livros com capas
       const mockBooks = Array.from({ length: 50 }, (_, index) => ({
         id: index + 1,
         title: `Livro ${index + 1}`,
         author: `Autor ${index + 1}`,
+        cover: `https://via.placeholder.com/150?text=Livro+${index + 1}`, // URL mockada para a capa
       }));
       setBooks(mockBooks);
     };
@@ -37,8 +38,13 @@ const Books = () => {
           {books.slice(0, visibleBooks).map((book) => (
             <div
               key={book.id}
-              className="border border-gray-300 rounded-lg p-4 shadow hover:shadow-lg transition"
+              className="border border-gray-300 rounded-lg shadow hover:shadow-lg transition p-2 flex flex-col items-center text-center"
             >
+              <img
+                src={book.cover}
+                alt={`Capa do livro ${book.title}`}
+                className="w-full h-48 object-cover mb-4 rounded"
+              />
               <h2 className="font-semibold text-lg">{book.title}</h2>
               <p className="text-gray-600">Autor: {book.author}</p>
             </div>
