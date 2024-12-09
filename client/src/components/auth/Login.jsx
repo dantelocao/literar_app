@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext"; // Corrigido para o caminho correto
 import { loginStart, loginSuccess, loginFailure } from "../../context/authActions"; // Importando as actions
 import Footer from "../footer/Footer";
-import Header from "../header/Header";
+import { loginAuth } from "../../utils/api/auth";
 
 const Login = () => {
   const [auth, setAuth] = useState({
@@ -13,30 +12,20 @@ const Login = () => {
     password: "",
   });
 
-  const { dispatch } = useContext(AuthContext); // Usando o dispatch do AuthContext
+  console.log(auth)
+
+  const { user, isFetching, error, dispatch } = useContext(AuthContext); // Usando o dispatch do AuthContext
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginStart()); // Inicia o login (mudando o estado para "em progresso")
-
-    try {
-      // Fazendo a requisição de login (substitua com sua API real)
-      const response = await axios.post("http://localhost:5000/api/v1/auth/login", auth);
-
-      // Atualizando o estado do usuário após login bem-sucedido
-      dispatch(loginSuccess(response.data)); // Salva o usuário no estado global
-      localStorage.setItem("user", JSON.stringify(response.data)); // Persistência no localStorage
-
-      navigate("/"); // Redireciona para a página inicial ou outra página após login
-    } catch (error) {
-      dispatch(loginFailure()); // Caso ocorra erro no login
-      alert("Erro no login! Tente novamente.");
-    }
+    loginAuth({email: auth.email, password: auth.password}, dispatch)
   };
 
+  console.log(user)
+
+
   const goToRegister = () => {
-    // Função para redirecionar para a página de cadastro
     navigate("/register");
   };
 
@@ -60,10 +49,12 @@ const Login = () => {
               <input
                 type="email"
                 id="email"
-                value={auth.email}
-                onChange={(e) =>
-                  setAuth((prev) => ({ ...prev, email: e.target.value }))
-                }
+                onChange={(e) => {
+                  setAuth({ 
+                    ...auth,
+                    email: e.target.value 
+                  })
+                }}
                 placeholder="Digite seu email"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required
@@ -80,10 +71,12 @@ const Login = () => {
               <input
                 type="password"
                 id="password"
-                value={auth.password}
-                onChange={(e) =>
-                  setAuth((prev) => ({ ...prev, password: e.target.value }))
-                }
+                onChange={(e) => {
+                  setAuth({ 
+                    ...auth,
+                    password: e.target.value 
+                  })
+                }}
                 placeholder="Digite sua senha"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required
@@ -96,7 +89,7 @@ const Login = () => {
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
-                Entrar
+                {isFetching ? "Entrando" : "Entrar"}
               </button>
             </div>
           </form>

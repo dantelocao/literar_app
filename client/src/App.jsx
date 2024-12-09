@@ -1,41 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import './app.css';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Login from "./components/auth/Login.jsx";
 import PagePerfil from "./pages/PagePerfil.jsx";
 import Register from "./components/auth/Register.jsx";
-import ProtectedRoute from "./components/ProtectedRoute"; // Importando o componente de rota protegida
+import { AuthContext } from "./context/authContext.jsx";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  const { user } = useContext(AuthContext)
+
   return (
+    <>
+    <ToastContainer />
     <Router>
       <div>
         <Routes>
-          {/* Rota pública */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
 
-          {/* Rotas protegidas */}
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile/:username"
-            element={
-              <ProtectedRoute>
-                <PagePerfil />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/" element={ user ? <Home /> :  <Register /> } />
+          <Route path="/profile/:username" element={<PagePerfil />} />
+
+          <Route path="/register" element={user ? <Navigate to={"/"}/> : <Register />} />
+          <Route path="/login" element={ user ? <Navigate to={"/"}/> : <Login />} />
+
+
         </Routes>
       </div>
     </Router>
+    </>
   );
 }
 

@@ -21,7 +21,7 @@ const Home = () => {
             <Biblioteca />
           </main>
 
-          <PostFeed />
+          <PostFeed username />
     
           {/* Rodapé */}
           <Footer />
