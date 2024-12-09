@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import CriarPost from '../creationPost/Creationpost.jsx';
 import { useParams } from "react-router-dom";
-import { getUserProfileData } from '../../utils/api/api';
+import { getUserProfileData, updateUserProfileData } from '../../utils/api/api';
 import PostFeed from '../booksFeed/PostFeed.jsx';
 
 const Perfil = () => {
   const { username } = useParams();
+  
   const [user, setUser] = useState({});
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
     desc: ""
   });
 
@@ -40,24 +39,21 @@ const Perfil = () => {
   // Envia os dados atualizados para a API
   const handleSave = async () => {
     try {
-      const response = await fetch("https://sua-api.com/api/v1/users/update", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        const updatedUser = await response.json();
-        setUser(updatedUser.userInfo);
-        setEditing(false);
-        alert("Informações atualizadas com sucesso!");
+      const data = {
+        userId: user._id,  // Corrigido
+        email: formData.email,
+        username: formData.username,
+        desc: formData.desc,
+      };
+      const response = await updateUserProfileData(data.userId, data);
+  
+      if (response.status === 200) {
+        console.log("Dados atualizados com sucesso!");
       } else {
-        alert("Erro ao atualizar informações.");
+        console.error("Erro ao atualizar:", response.data);
       }
     } catch (error) {
-      console.error("Erro na solicitação:", error);
+      console.error("Erro:", error);
     }
   };
 
@@ -78,28 +74,6 @@ const Perfil = () => {
         <div className="ml-8 flex-1 space-y-2">
           {editing ? (
             <>
-              <div>
-                <label className="block text-gray-600 font-bold">Nome:</label>
-                <input
-                  type="text"
-                  name="username"
-                  value={formData.username}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded"
-                />
-              </div>
-
-              <div>
-                <label className="block text-gray-600 font-bold">Email:</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded"
-                />
-              </div>
-
               <div>
                 <label className="block text-gray-600 font-bold">Descrição:</label>
                 <textarea
@@ -145,14 +119,14 @@ const Perfil = () => {
               onClick={() => setEditing(true)}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
-              Editar Informações
+              Editar descrição
             </button>
           )}
         </div>
       </section>
 
       {/* Seção de Posts */}
-      <PostFeed userPosts={user.posts} />
+      <PostFeed userPosts />
 
       <section>
         <CriarPost />
