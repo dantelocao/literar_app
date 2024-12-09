@@ -5,6 +5,7 @@ import axios from 'axios'; // Importando o axios
 import { toast } from 'react-toastify';
 import { authRegister } from '../../utils/api/auth';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 
 const Register = () => {
@@ -133,6 +134,13 @@ const Register = () => {
               >
                 Cadastrar
               </button>
+
+              <Link
+                to="/login"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Ja possui uma conta?
+              </Link>
             </div>
           </form>
         </div>

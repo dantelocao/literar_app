@@ -90,7 +90,6 @@ const Post = ({ post }) => {
         </div>
         <div className="flex space-x-2">
           <Link
-            to={`/update-post/1`} // Rota de atualização
             className="px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-medium transition"
           >
             Atualizar

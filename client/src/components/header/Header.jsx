@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/authContext';
 
 const Header = () => {
+  const { user} = useContext(AuthContext)
+
   return (
     <header className="bg-indigo-600 text-white p-4 shadow-md">
     <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
@@ -33,7 +36,7 @@ const Header = () => {
             </a>
           </li>
           <li>
-            <Link to="/profile"
+            <Link to={`/profile/${user.username}`} 
             className="px-3 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-medium transition text-sm md:text-base"
             >
             Perfil</Link>
