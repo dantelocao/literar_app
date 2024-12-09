@@ -2,45 +2,84 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/header/Header.jsx';
 import Footer from '../components/footer/Footer.jsx';
 
-const Books = () => {
-  const [books, setBooks] = useState([]); // Estado para armazenar a lista de livros
+// Componente para exibir um livro individual
+const BookCard = ({ book }) => (
+  <div className="border border-gray-300 rounded-lg p-4 shadow hover:shadow-lg transition">
+    <div className="w-full h-48 bg-gray-200 flex items-center justify-center mb-4 rounded">
+      <p className="text-gray-500 text-sm">Sem capa disponível</p>
+    </div>
+    <h2 className="font-semibold text-lg">{book.titulo}</h2>
+    <p className="text-gray-600">Autor: {book.autor}</p>
+    <p className="text-gray-500">ISBN: {book.isbn}</p>
+    <p className="text-gray-500">Páginas: {book.paginas}</p>
+    <p className="text-gray-500">Ano: {book.ano}</p>
+  </div>
+);
 
-  // Simula a busca de dados de livros (substituir com chamada à API)
+const Books = () => {
+  const [books, setBooks] = useState([]); // Estado para armazenar todos os livros
+  const [visibleBooks, setVisibleBooks] = useState(24); // Controla quantos livros estão visíveis
+  const [loading, setLoading] = useState(true); // Estado de carregamento
+
   useEffect(() => {
     const fetchBooks = async () => {
-      // Dados mockados
-      const mockBooks = [
-        { id: 1, title: 'O Senhor dos Anéis', author: 'J.R.R. Tolkien' },
-        { id: 2, title: 'Harry Potter', author: 'J.K. Rowling' },
-        { id: 3, title: 'Dom Quixote', author: 'Miguel de Cervantes' },
-        { id: 4, title: '1984', author: 'George Orwell' },
-        { id: 5, title: 'O Alquimista', author: 'Paulo Coelho' },
-      ];
-      setBooks(mockBooks);
+      setLoading(true);
+      try {
+        const response = await fetch('/livros.json'); // Busca o arquivo JSON na pasta public
+        if (!response.ok) {
+          throw new Error('Erro ao carregar os dados');
+        }
+        const data = await response.json();
+        setBooks(data);
+      } catch (error) {
+        console.error('Erro ao buscar livros:', error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchBooks();
   }, []);
 
+  // Carrega mais 8 livros na página
+  const loadMoreBooks = () => {
+    setVisibleBooks((prev) => prev + 8);
+  };
+
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <main style={{ padding: '20px' }}>
-        <h1>Lista de Livros</h1>
-        <div>
-          {books.length > 0 ? (
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-              {books.map((book) => (
-                <li key={book.id} style={{ marginBottom: '1rem', border: '1px solid #ccc', padding: '10px', borderRadius: '5px' }}>
-                  <h2>{book.title}</h2>
-                  <p><strong>Autor:</strong> {book.author}</p>
-                </li>
+      <main className="flex-grow container mx-auto p-4">
+        <h1 className="text-3xl font-bold mb-6 text-center">Biblioteca</h1>
+
+        {loading ? (
+          // Mensagem de carregamento
+          <p className="text-center">Carregando livros...</p>
+        ) : books.length === 0 ? (
+          // Mensagem para lista vazia
+          <p className="text-center text-gray-500">Nenhum livro encontrado.</p>
+        ) : (
+          <>
+            {/* Grade de livros */}
+            <div className="grid grid-cols-8 gap-4">
+              {books.slice(0, visibleBooks).map((book) => (
+                <BookCard key={book.isbn} book={book} />
               ))}
-            </ul>
-          ) : (
-            <p>Carregando livros...</p>
-          )}
-        </div>
+            </div>
+
+            {/* Botão "Ver Mais" */}
+            {visibleBooks < books.length && (
+              <div className="text-center mt-8">
+                <button
+                  onClick={loadMoreBooks}
+                  className="px-6 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 transition"
+                >
+                  Ver Mais
+                </button>
+              </div>
+            )}
+          </>
+        )}
       </main>
       <Footer />
     </div>
