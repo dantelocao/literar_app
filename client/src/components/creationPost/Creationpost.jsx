@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createPost, getAllBooks, getUserProfileData } from '../../utils/api/api';
-import { AuthContext } from '../../context/authContext';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 
 const CriarPost = () => {
@@ -47,6 +46,21 @@ const CriarPost = () => {
   };
 
 
+
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    // Redireciona para a página inicial
+    navigate('/');
+
+    // Depois de 1 segundo, vai para o perfil
+    setTimeout(() => {
+      navigate(`/profile/${user.username}`);
+    }, 50); 
+  };
+
+
+
   const getUserProfileInfo = async () => {
 
     try {
@@ -61,6 +75,7 @@ const CriarPost = () => {
 
       try {
         const res = await createPost(postData)
+        handleNavigate()
         
       } catch (error) {
         console.log(error)

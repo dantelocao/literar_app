@@ -3,7 +3,7 @@ import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import axios from 'axios'; // Importando o axios
 import { toast } from 'react-toastify';
-import { authRegister } from '../../utils/api/auth';
+import { authRegister } from '../../utils/api/auth.js';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 

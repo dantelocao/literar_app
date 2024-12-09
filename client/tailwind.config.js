@@ -7,7 +7,8 @@ module.exports = {
         "./src/components/creationPost/Posts.jsx",
         "./src/components/creationPost/Creationpost.jsx",
         "./src/components/perfil/Perfil.jsx",
-        './src/**/*.{js,jsx,ts,tsx}'
+        "./src/components/header/Header.jsx",
+        './src/**/*.{js,jsx,ts,tsx}',
 
 
     ],

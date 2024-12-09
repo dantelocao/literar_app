@@ -6,7 +6,7 @@ import PostFeed from '../booksFeed/PostFeed.jsx';
 
 const Perfil = () => {
   const { username } = useParams();
-  
+
   const [user, setUser] = useState({});
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({

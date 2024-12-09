@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const API = axios.create({
-    baseURL: "http://localhost:5000/api/v1",
+    baseURL: "http://34.172.77.82:5000/api/v1",
 })
 
 export const getTimelinePosts = (username) => API.get(`/posts/get-timeline-posts/${username}`)
