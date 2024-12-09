@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Header from '../header/header';
-import Footer from '../footer/footer';
+import Header from '../header/Header';
+import Footer from '../footer/Footer';
 import axios from 'axios'; // Importando o axios
 
 

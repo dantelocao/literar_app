@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Header from '../header/header';
-import Footer from '../footer/footer';
+import Header from '../header/Header';
+import Footer from '../footer/Footer';
 import { useNavigate } from 'react-router-dom'; // Para redirecionar após login
 
 const Login = () => {

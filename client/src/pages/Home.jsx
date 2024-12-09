@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Header from '../components/header/header.jsx';
-import Footer from '../components/footer/footer.jsx';
-import Carrossel from '../components/booksFeed/carrossel.jsx';
-import Biblioteca from '../components/booksFeed/biblioteca.jsx';
+import Header from '../components/header/Header.jsx';
+import Footer from '../components/footer/Footer.jsx';
+import Carrossel from '../components/booksFeed/Carrossel.jsx';
+import Biblioteca from '../components/booksFeed/Biblioteca.jsx';
 import Post from '../components/creationPost/Posts.jsx';
 import PostFeed from '../components/booksFeed/PostFeed.jsx';
 

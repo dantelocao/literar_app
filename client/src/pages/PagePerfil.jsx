@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Header from '../components/header/header.jsx';
-import Footer from '../components/footer/footer.jsx';
+import Header from '../components/header/Header.jsx';
+import Footer from '../components/footer/Footer.jsx';
 import Perfil from '../components/perfil/Perfil.jsx';
 
 function PagePerfil() {
