@@ -8,6 +8,7 @@ import Register from "./components/auth/Register.jsx";
 import { AuthContext } from "./context/authContext.jsx";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Books from "./pages/Books.jsx";
 
 function App() {
   const { user } = useContext(AuthContext)
@@ -18,6 +19,8 @@ function App() {
     <Router>
       <div>
         <Routes>
+
+          <Route path="/books" element={<Books />} />
 
           <Route path="/" element={ user ? <Home /> :  <Register /> } />
           <Route path="/profile/:username" element={<PagePerfil />} />

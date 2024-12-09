@@ -19,7 +19,6 @@ const Perfil = () => {
     const getUserProfileInfo = async () => {
       try {
         const response = await getUserProfileData(username)
-        console.log(response.data.userInfo)
         setUser(response.data.userInfo)
 
       } catch (error) {

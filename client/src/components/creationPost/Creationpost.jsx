@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { getAllBooks } from '../../utils/api/api';
+import { AuthContext } from '../../context/authContext';
 
 const CriarPost = () => {
+  const { user } = useContext(AuthContext)
+
   // Estado para armazenar os livros selecionados e privacidade
   const [livrosUsuario, setLivrosUsuario] = useState([]);
   const [livrosSelecionados, setLivrosSelecionados] = useState([]);
-
-  
   const [privacidade, setPrivacidade] = useState('todos');
   const [dropdownAberto, setDropdownAberto] = useState(false); // Controla a visibilidade do dropdown
 
   // Função para buscar os livros do backend
   const fetchLivros = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/v1/books/get-books');
-      const data = await response.json();
+      const response = await getAllBooks()
 
       // Verifique se data.allBooks é um array antes de atualizar o estado
-      if (Array.isArray(data.allBooks)) {
-        setLivrosUsuario(data.allBooks);  // Atualiza o estado com o array de livros
+      if (Array.isArray(response.data.allBooks)) {
+        setLivrosUsuario(response.data.allBooks);  // Atualiza o estado com o array de livros
         //console.log(livrosUsuario)
       } else {
         console.error('A chave "allBooks" não é um array');
@@ -44,43 +45,17 @@ const CriarPost = () => {
   };
 
 
-  // Função para lidar com o envio do formulário
- const handleCreatePost = async (e) => {
+// Função para lidar com o envio do formulário
+const handleCreatePost = async (e) => {
   e.preventDefault(); // Evita o envio padrão do formulário (recarregar a página)
-
-  try {
-    // Enviando os dados para o backend usando o axios
-    const response = await axios.post('http://localhost:5000/api/v1/posts/create-post', {
-      books: livrosSelecionados,
-      userId,
-      userName,
-      desc,
-    });
-
-    // Verificando se a resposta foi bem-sucedida
-    if (response.status === 200) {
-      alert('Cadastro realizado com sucesso!');
-
-    } else {
-      throw new Error('Erro ao cadastrar. Tente novamente.');
-    }
-  } catch (error) {
-    setError(error.response?.data?.message || error.message || 'Erro desconhecido. Tente novamente.');
-  }
+ 
 };
 
+const handleSubmit = () => {
+  e.preventDefault(); // Evita o envio padrão do formulário (recarregar a página)
 
 
-
-  // Função para enviar o post
-  const handleSubmit = (e) => {
-
-
-    console.log('Post Criado:', postData);
-    // Aqui você poderia enviar o postData para o backend para salvar no banco de dados
-    
-
-  };
+}
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg space-y-6">

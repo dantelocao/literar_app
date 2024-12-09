@@ -12,8 +12,6 @@ const Login = () => {
     password: "",
   });
 
-  console.log(auth)
-
   const { user, isFetching, error, dispatch } = useContext(AuthContext); // Usando o dispatch do AuthContext
   const navigate = useNavigate();
 
@@ -21,9 +19,6 @@ const Login = () => {
     e.preventDefault();
     loginAuth({email: auth.email, password: auth.password}, dispatch)
   };
-
-  console.log(user)
-
 
   const goToRegister = () => {
     navigate("/register");
