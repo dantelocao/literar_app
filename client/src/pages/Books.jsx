@@ -6,13 +6,16 @@ import Footer from '../components/footer/Footer.jsx';
 const BookCard = ({ book }) => (
   <div className="border border-gray-300 rounded-lg p-4 shadow hover:shadow-lg transition">
     <div className="w-full h-48 bg-gray-200 flex items-center justify-center mb-4 rounded">
-      <p className="text-gray-500 text-sm">Sem capa disponível</p>
+      <p className="text-gray-500 text-sm">{book.titulo}</p>
     </div>
     <h2 className="font-semibold text-lg">{book.titulo}</h2>
     <p className="text-gray-600">Autor: {book.autor}</p>
+    {/*
+    
     <p className="text-gray-500">ISBN: {book.isbn}</p>
     <p className="text-gray-500">Páginas: {book.paginas}</p>
     <p className="text-gray-500">Ano: {book.ano}</p>
+    */}
   </div>
 );
 
@@ -61,7 +64,7 @@ const Books = () => {
         ) : (
           <>
             {/* Grade de livros */}
-            <div className="grid grid-cols-8 gap-4">
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
               {books.slice(0, visibleBooks).map((book) => (
                 <BookCard key={book.isbn} book={book} />
               ))}
