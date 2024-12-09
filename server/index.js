@@ -12,7 +12,11 @@ dotenv.config();
 
 app.use(helmet());
 app.use(morgan("common"));
-app.use(cors());
+app.use(cors({
+    origin: '*', // Permite acesso de qualquer origem (use com cuidado)
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 app.use(express.json());
 
 app.use(routes);
