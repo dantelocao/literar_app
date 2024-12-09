@@ -8,6 +8,7 @@ export const registerUser = async (body) => {
         username: body.username,
         email: body.email,
         password: hashedPassword,
+        profilePicture: "https://via.placeholder.com/150"
     })
     await newUser.save();
     return newUser;

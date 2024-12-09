@@ -15,6 +15,8 @@ const Perfil = () => {
   const { username } = useParams()
   const [user, setUser] = useState({})
 
+  //console.log(user)
+
   useEffect(() => {
     const getUserProfileInfo = async () => {
       try {

@@ -14,7 +14,7 @@ const Post = ({ post }) => {
     const getUserInfo = async () => {
       try {
         const response = await getUserData(post.userId)
-        //console.log(response.data.userInfo)
+        console.log(response.data.userInfo)
         setUser(response.data.userInfo)
 
       } catch (error) {
@@ -74,73 +74,62 @@ const Post = ({ post }) => {
   };
 
   return (
-    <section id="home" className="mb-10">
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex items-center space-x-2">
-          <img
-            src="https://www.example.com/sua-imagem.jpg" // Substitua com o link da imagem
-            alt={post.userName}
-            className="w-12 h-12 rounded-full object-cover" // Classe para imagem redonda
-          />
-          <h2 className="text-xl sm:text-2xl font-semibold text-center sm:text-left">
-            <Link to={`/profile/${user.username}`} className="text-indigo-600 hover:text-indigo-800">
-              Post de {user.username}
-            </Link>
-          </h2>
-        </div>
-        <div className="flex space-x-2">
-          <Link
-            className="px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-medium transition"
-          >
-            Atualizar
-          </Link>
-          <button
-            onClick={() => handleDelete(1)} // Deleta o post com o ID 1
-            className="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-400 text-white font-medium transition"
-          >
-            Deletar
-          </button>
-        </div>
-      </div>
+<section id="home" className="mb-10 px-6 lg:px-16">
+  {/* Cabeçalho do Post */}
+  <div className="flex items-center mb-6 space-x-4">
+    <img
+      src={user.profilePicture} 
+      alt={post.userName}
+      className="w-16 h-16 rounded-full object-cover shadow-md"
+    />
+    <h2 className="text-2xl font-bold text-indigo-700">
+      <Link 
+        to={`/profile/${user.username}`} 
+        className="hover:text-indigo-900 transition"
+      >
+        Post de {user.username}
+      </Link>
+    </h2>
+  </div>
 
-      <p className="text-gray-700 text-center sm:text-left">{post.desc}</p>
+  {/* Descrição */}
+  <p className="text-gray-800 text-lg leading-relaxed max-w-4xl mb-8">
+    {post.desc}
+  </p>
 
-      <Slider {...settings} className="mt-6">
-        <div>
-          <div className="card p-4 bg-white shadow rounded-lg text-center">
-            <img
-              src="https://images.pexels.com/photos/1053687/pexels-photo-1053687.jpeg"
-              alt="Livro em Destaque"
-              className="fixed-img mx-auto"
-            />
-            <h3 className="font-semibold mt-2">Livro em Destaque</h3>
-            <p className="text-sm text-gray-600">"A Montanha Mágica" - Thomas Mann</p>
-          </div>
-        </div>
-        <div>
-          <div className="card p-4 bg-white shadow rounded-lg text-center">
-            <img
-              src="https://images.unsplash.com/photo-1512820790803-83ca734da794"
-              alt="Resenha Popular"
-              className="fixed-img mx-auto"
-            />
-            <h3 className="font-semibold mt-2">Resenha Popular</h3>
-            <p className="text-sm text-gray-600">"Um livro que transforma vidas!"</p>
-          </div>
-        </div>
-        <div>
-          <div className="card p-4 bg-white shadow rounded-lg text-center">
-            <img
-              src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f"
-              alt="Sugestões para Você"
-              className="fixed-img mx-auto"
-            />
-            <h3 className="font-semibold mt-2">Sugestões para Você</h3>
-            <p className="text-sm text-gray-600">"Grande Sertão: Veredas" - Guimarães Rosa</p>
-          </div>
-        </div>
-      </Slider>
-    </section>
+  {/* Slider de Livros */}
+  <Slider {...settings} className="mt-8">
+    <div className="card p-6 bg-white shadow-md rounded-lg text-left">
+      <img
+        src="https://images.pexels.com/photos/1053687/pexels-photo-1053687.jpeg"
+        alt="Livro em Destaque"
+        className="w-full h-64 object-cover rounded-md mb-4"
+      />
+      <h3 className="font-bold text-lg text-indigo-700">Livro em Destaque</h3>
+      <p className="text-md text-gray-700 mt-2">"A Montanha Mágica" - Thomas Mann</p>
+    </div>
+
+    <div className="card p-6 bg-white shadow-md rounded-lg text-left">
+      <img
+        src="https://images.unsplash.com/photo-1512820790803-83ca734da794"
+        alt="Resenha Popular"
+        className="w-full h-64 object-cover rounded-md mb-4"
+      />
+      <h3 className="font-bold text-lg text-indigo-700">Resenha Popular</h3>
+      <p className="text-md text-gray-700 mt-2">"Um livro que transforma vidas!"</p>
+    </div>
+
+    <div className="card p-6 bg-white shadow-md rounded-lg text-left">
+      <img
+        src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f"
+        alt="Sugestões para Você"
+        className="w-full h-64 object-cover rounded-md mb-4"
+      />
+      <h3 className="font-bold text-lg text-indigo-700">Sugestões para Você</h3>
+      <p className="text-md text-gray-700 mt-2">"Grande Sertão: Veredas" - Guimarães Rosa</p>
+    </div>
+  </Slider>
+</section>
   );
 };
 

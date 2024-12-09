@@ -52,8 +52,16 @@ const handleCreatePost = async (e) => {
 };
 
 const handleSubmit = () => {
-  e.preventDefault(); // Evita o envio padrão do formulário (recarregar a página)
-
+  //e.preventDefault(); // Evita o envio padrão do formulário (recarregar a página)
+  const postData = {
+    userId: user.userId,
+    userName: user.userName,
+    desc: user.desc,
+    books: livrosSelecionados,
+  };
+  
+  
+  console.log(postData)
 
 }
 
