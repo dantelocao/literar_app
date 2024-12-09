@@ -22,8 +22,6 @@ export const createBookController = async (req, res) => {
 export const getAllBooksController = async (req, res) => {
     try {
         const allBooks = await getAllBooks(req.body);
-        console.log(allBooks)
-
         res.status(200).json({
             allBooks
         });

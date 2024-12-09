@@ -32,7 +32,7 @@ export const deleteUser = async (userId) =>{
     }
 };
 
-export const  getUser = async (userId) =>{
+export const getUser = async (userId) =>{
     try {
         const user = await userModel.findById(userId);
         return user;
@@ -41,6 +41,19 @@ export const  getUser = async (userId) =>{
         throw err;
     }
 };
+
+
+export const getUserProfile = async (querry) =>{
+    try {
+        const user = await userModel.findOne({username: querry.username});
+        return user;
+        
+    } catch (err) {
+        throw err;
+    }
+};
+
+
 
 export const followUser = async (userData, updateData) =>{
     if (userData.userId === updateData.id) {

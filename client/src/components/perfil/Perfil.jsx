@@ -1,8 +1,29 @@
 import React from 'react';
 import CriarPost from '../creationPost/Creationpost.jsx';
 import Post from '../creationPost/Posts.jsx';
+import { getUserProfileData } from '../../utils/api/api.js';
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react'
 
-const Perfil = ({ perfil }) => {
+const Perfil = () => {
+  const { username } = useParams()
+  console.log(username)
+
+  useEffect(() => {
+    const getUserProfileInfo = async () => {
+      try {
+        const response = await getUserProfileData()
+        console.log(response.data.userInfo)
+
+      } catch (error) {
+        console.error('Erro ao buscar dados de usuario:', error);
+      }
+    };
+    getUserProfileInfo()
+  }, []);
+
+
+
   return (
     <main className="container mx-auto p-8">
       
@@ -32,9 +53,6 @@ const Perfil = ({ perfil }) => {
           </button>
         </div>
       </section>
-
-      <Post />
-      <Post />
 
       {/* Seção de Posts */}
       <section>

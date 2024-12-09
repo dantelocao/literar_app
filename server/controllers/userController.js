@@ -3,7 +3,8 @@ import {
     updateUser, 
     getUser, 
     followUser, 
-    unfollowUser 
+    unfollowUser, 
+    getUserProfile
 } from "../services/userServices.js";
 
 export const updateUserController =  async(req, res) => {
@@ -41,21 +42,32 @@ export const deleteUserController =  async(req, res) => {
 };
 
 export const getUserController =  async(req, res) => {
-    if (req.body.userId === req.params.id || req.body.isAdmin) {
-        try {
-            const user = await getUser(req.params.id); 
-            const { password, ...data } = user._doc;
-            res.status(200).json({
-                data,
-                message:"get account",
-            });
-        } catch (err) {
-            console.log(err);
-            res.status(500).json(err);
-        }        
-    } else {
-        res.status(500).json("you can only get your account!");
-    }
+    try {
+        const user = await getUser(req.params.id); 
+        const { password, ...data } = user._doc;
+        res.status(200).json({
+            userInfo: data,
+            message:"get account",
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }        
+};
+
+
+export const getUserProfileController =  async(req, res) => {
+    try {
+        const user = await getUserProfile(req.querry); 
+        const { password, ...data } = user._doc;
+        res.status(200).json({
+            userInfo: data,
+            message:"get account",
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }        
 };
 
 export const followUserController =  async(req, res) => {

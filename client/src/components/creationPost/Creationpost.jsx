@@ -4,6 +4,8 @@ const CriarPost = () => {
   // Estado para armazenar os livros selecionados e privacidade
   const [livrosUsuario, setLivrosUsuario] = useState([]);
   const [livrosSelecionados, setLivrosSelecionados] = useState([]);
+
+  
   const [privacidade, setPrivacidade] = useState('todos');
   const [dropdownAberto, setDropdownAberto] = useState(false); // Controla a visibilidade do dropdown
 
@@ -41,17 +43,43 @@ const CriarPost = () => {
     );
   };
 
+
+  // Função para lidar com o envio do formulário
+ const handleCreatePost = async (e) => {
+  e.preventDefault(); // Evita o envio padrão do formulário (recarregar a página)
+
+  try {
+    // Enviando os dados para o backend usando o axios
+    const response = await axios.post('http://localhost:5000/api/v1/posts/create-post', {
+      books: livrosSelecionados,
+      userId,
+      userName,
+      desc,
+    });
+
+    // Verificando se a resposta foi bem-sucedida
+    if (response.status === 200) {
+      alert('Cadastro realizado com sucesso!');
+
+    } else {
+      throw new Error('Erro ao cadastrar. Tente novamente.');
+    }
+  } catch (error) {
+    setError(error.response?.data?.message || error.message || 'Erro desconhecido. Tente novamente.');
+  }
+};
+
+
+
+
   // Função para enviar o post
   const handleSubmit = (e) => {
-    e.preventDefault();
 
-    const postData = {
-      livros: livrosSelecionados,
-      privacidade,
-    };
 
     console.log('Post Criado:', postData);
     // Aqui você poderia enviar o postData para o backend para salvar no banco de dados
+    
+
   };
 
   return (

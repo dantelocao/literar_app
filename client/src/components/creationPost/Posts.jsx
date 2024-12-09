@@ -3,11 +3,44 @@ import Slider from 'react-slick'; // Importação do react-slick
 import 'slick-carousel/slick/slick.css'; // Estilos do carrossel
 import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom'; // Importando o Link para a navegação
+import { useEffect, useState } from 'react'
+import { getAllBooks, getUserData } from '../../utils/api/api';
 
 const Post = ({ post }) => {
-  console.log(post._id)
-  console.log(post.userName)
-  console.log(post.desc)
+  const [books, setBooks] = useState([]);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const response = await getUserData(post.userId)
+        console.log(response.data.userInfo)
+
+      } catch (error) {
+        console.error('Erro ao buscar dados de usuario:', error);
+      }
+    };
+    getUserInfo()
+  }, [post.userId]);
+
+
+  useEffect(() => {
+    const getBooks = async () => {
+      try {
+        const response = await getAllBooks()
+        if (Array.isArray(response.data.allBooks)) {
+          setBooks(response.data.allBooks)// Atualiza o estado corretamente
+          //console.log(books)
+        } else {
+          console.error('A chave "data" não é um array');
+        }
+      } catch (error) {
+        console.error('Erro ao buscar livros:', error);
+      }
+    };
+    getBooks()
+  }, []);
+
 
 
   const settings = {
@@ -42,9 +75,18 @@ const Post = ({ post }) => {
   return (
     <section id="home" className="mb-10">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl sm:text-2xl font-semibold text-center sm:text-left">
-          Post de {post.userName}
-        </h2>
+        <div className="flex items-center space-x-2">
+          <img
+            src="https://www.example.com/sua-imagem.jpg" // Substitua com o link da imagem
+            alt={post.userName}
+            className="w-12 h-12 rounded-full object-cover" // Classe para imagem redonda
+          />
+          <h2 className="text-xl sm:text-2xl font-semibold text-center sm:text-left">
+            <Link to={`/profile/${post.userName}`} className="text-indigo-600 hover:text-indigo-800">
+              Post de {post.userName}
+            </Link>
+          </h2>
+        </div>
         <div className="flex space-x-2">
           <Link
             to={`/update-post/1`} // Rota de atualização
@@ -61,9 +103,7 @@ const Post = ({ post }) => {
         </div>
       </div>
 
-      <p className="text-gray-700 text-center sm:text-left">
-        {post.desc}
-      </p>
+      <p className="text-gray-700 text-center sm:text-left">{post.desc}</p>
 
       <Slider {...settings} className="mt-6">
         <div>

@@ -13,7 +13,7 @@ function App() {
         {/* Definindo as rotas */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<PagePerfil />} />
+          <Route path="/profile/:username" element={<PagePerfil />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>

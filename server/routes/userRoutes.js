@@ -3,6 +3,7 @@ import {
     deleteUserController, 
     followUserController, 
     getUserController, 
+    getUserProfileController, 
     unfollowUserController, 
     updateUserController 
 } from "../controllers/userController.js";
@@ -13,8 +14,14 @@ const router = express.Router();
 router.put("/:id", updateUserController)
 // delete user
 router.delete("/:id", deleteUserController)
+
 // get user
 router.get("/:id", getUserController)
+
+// get user profile
+router.get("/", getUserProfileController)
+
+
 //follow user
 router.put("/follow/:id", followUserController)
 //unfollow user
