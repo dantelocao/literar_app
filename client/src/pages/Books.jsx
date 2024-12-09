@@ -6,10 +6,10 @@ const Books = () => {
   const [books, setBooks] = useState([]); // Estado para armazenar todos os livros
   const [visibleBooks, setVisibleBooks] = useState(24); // Controla quantos livros estão visíveis
 
-  // Simula a busca de dados (substituir com sua API real)
+  // Simula a busca de dados (substituir API
   useEffect(() => {
     const fetchBooks = async () => {
-      // Mock de 50 livros com capas
+      // Simulador de livros com capas
       const mockBooks = Array.from({ length: 50 }, (_, index) => ({
         id: index + 1,
         title: `Livro ${index + 1}`,
@@ -22,16 +22,16 @@ const Books = () => {
     fetchBooks();
   }, []);
 
-  // Função para carregar mais livros ao clicar no botão
+  // Mais livros
   const loadMoreBooks = () => {
-    setVisibleBooks((prev) => prev + 24); // Exibe mais 24 livros
+    setVisibleBooks((prev) => prev + 8);
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-grow container mx-auto p-4">
-        <h1 className="text-3xl font-bold mb-6 text-center">Lista de Livros</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center">Biblioteca</h1>
 
         {/* Grade de livros */}
         <div className="grid grid-cols-8 gap-4">
