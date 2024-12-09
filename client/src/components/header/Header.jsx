@@ -35,18 +35,10 @@ const Header = () => {
           </li>
           <li>
             <a
-              href="#library"
+              href="/library"
               className="px-3 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-medium transition text-sm md:text-base"
             >
               Biblioteca
-            </a>
-          </li>
-          <li>
-            <a
-              href="#community"
-              className="px-3 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-medium transition text-sm md:text-base"
-            >
-              Comunidade
             </a>
           </li>
           <li>
