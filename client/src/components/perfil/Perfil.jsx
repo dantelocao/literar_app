@@ -1,19 +1,26 @@
 import React from 'react';
 import CriarPost from '../creationPost/Creationpost.jsx';
 import Post from '../creationPost/Posts.jsx';
-import { getUserProfileData } from '../../utils/api/api.js';
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react'
+import { 
+    getAllBooks, 
+    getUserData,
+    getUserProfileData
+  } from '../../utils/api/api';
+import PostFeed from '../booksFeed/PostFeed.jsx';
+
 
 const Perfil = () => {
   const { username } = useParams()
-  console.log(username)
+  const [user, setUser] = useState({})
 
   useEffect(() => {
     const getUserProfileInfo = async () => {
       try {
-        const response = await getUserProfileData()
+        const response = await getUserProfileData(username)
         console.log(response.data.userInfo)
+        setUser(response.data.userInfo)
 
       } catch (error) {
         console.error('Erro ao buscar dados de usuario:', error);
@@ -21,7 +28,6 @@ const Perfil = () => {
     };
     getUserProfileInfo()
   }, []);
-
 
 
   return (
@@ -41,9 +47,9 @@ const Perfil = () => {
 
         {/* Informações do Usuário */}
         <div className="ml-8 flex-1 space-y-2">
-          <h1 className="text-2xl font-bold">Nome do Usuário</h1>
-          <p className="text-gray-600"><strong>Email:</strong> usuario@example.com</p>
-          <p className="text-gray-600"><strong>Descrição:</strong> Breve descrição sobre o usuário, interesses e hobbies.</p>
+          <h1 className="text-2xl font-bold">{user.username}</h1>
+          <p className="text-gray-600"><strong>Email:</strong> {user.email}</p>
+          <p className="text-gray-600"><strong>Descrição:</strong> {user.desc || "I'm new here!"}</p>
         </div>
 
         {/* Botão de Edição */}
@@ -53,6 +59,8 @@ const Perfil = () => {
           </button>
         </div>
       </section>
+
+      <PostFeed userPosts/>
 
       {/* Seção de Posts */}
       <section>

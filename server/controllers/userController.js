@@ -58,16 +58,28 @@ export const getUserController =  async(req, res) => {
 
 export const getUserProfileController =  async(req, res) => {
     try {
-        const user = await getUserProfile(req.querry); 
+        const { username } = req.query;
+    
+        if (!username) {
+          return res.status(400).json({ message: "Parâmetro 'username' ausente." });
+        }
+    
+        const user = await getUserProfile({ username });
+    
+        if (!user) {
+          return res.status(404).json({ message: "Usuário não encontrado." });
+        }
+    
         const { password, ...data } = user._doc;
+    
         res.status(200).json({
-            userInfo: data,
-            message:"get account",
+          userInfo: data,
+          message: "Conta encontrada",
         });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }        
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Erro no servidor.", error: err.message });
+      }    
 };
 
 export const followUserController =  async(req, res) => {

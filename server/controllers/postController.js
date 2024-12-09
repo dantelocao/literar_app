@@ -1,6 +1,7 @@
 import { 
     createPost, 
     deletePost, 
+    getAllPosts, 
     getPost, 
     getTimelinePosts, 
     LikeAndDislike, 
@@ -93,11 +94,28 @@ export const getPostController = async (req, res) => {
     }        
 }
 
+export const getAllPostsController = async (req, res) => {
+    try {
+        const posts = await getAllPosts();
+        res.status(200).json({
+            posts,
+            message:"posts get completed",
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ 
+            message: "posts get failed",
+            err
+         })
+    }        
+}
+
+
 export const getTimelinePostController = async (req, res) => {
     try {
-        const timelinePosts = await getTimelinePosts(req.params); 
+        const posts = await getTimelinePosts(req.params); 
         res.status(200).json({
-            timelinePosts,
+            posts,
             message: "timeline post fetched successfully"
         });
     } catch (err) {

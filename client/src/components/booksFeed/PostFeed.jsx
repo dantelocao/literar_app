@@ -1,21 +1,22 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Post from '../creationPost/Posts'
-import { getTimelinePosts } from '../../utils/api/api'
+import { getAllPosts, getTimelinePosts } from '../../utils/api/api'
+import { useParams } from 'react-router-dom'
 
-const PostFeed = () => {
+const PostFeed = ({userPosts}) => {
     const [posts, setPosts] = useState([]);
+    const {username} = useParams()
 
     useEffect(() => {
       const fetchPosts = async () => {
         try {
-          const response = await getTimelinePosts("67536cae2edb45a47cc40161")
-          console.log(response.data.timelinePosts)
+          const response = userPosts ? await getTimelinePosts(username) : await getAllPosts()
 
-          // Verifique se "timelinePosts" é um array antes de atualizar o estado
-          if (Array.isArray(response.data.timelinePosts)) {
+          // Verifique se é um array antes de atualizar o estado
+          if (Array.isArray(response.data.posts)) {
             //console.log(data.timelinePosts);  // Verifica os posts recebidos
-            setPosts(response.data.timelinePosts.flat())// Atualiza o estado corretamente
+            setPosts(response.data.posts.flat())// Atualiza o estado corretamente
 
           } else {
             console.error('A chave "timelinePosts" não é um array');
@@ -26,11 +27,11 @@ const PostFeed = () => {
       };
     
       fetchPosts();
-    }, []);
+    }, [username]);
     
   return (
     <div className="space-y-4">
-        {posts.length > 1 ? (
+        {posts.length > 0 ? (
         posts.map((post) => (
           <Post key={post._id} post={post} />
         ))

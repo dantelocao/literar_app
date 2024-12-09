@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import userModel from "../models/userModel.js";
+import { query } from "express";
 
 export const  updateUser = async (userId, updateData) =>{
     if (updateData.password) {
@@ -43,9 +44,9 @@ export const getUser = async (userId) =>{
 };
 
 
-export const getUserProfile = async (querry) =>{
+export const getUserProfile = async (query) =>{
     try {
-        const user = await userModel.findOne({username: querry.username});
+        const user = await userModel.findOne({username: query.username});
         return user;
         
     } catch (err) {

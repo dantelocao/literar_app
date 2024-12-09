@@ -18,7 +18,7 @@ const CriarPost = () => {
       // Verifique se data.allBooks é um array antes de atualizar o estado
       if (Array.isArray(data.allBooks)) {
         setLivrosUsuario(data.allBooks);  // Atualiza o estado com o array de livros
-        console.log(livrosUsuario)
+        //console.log(livrosUsuario)
       } else {
         console.error('A chave "allBooks" não é um array');
       }

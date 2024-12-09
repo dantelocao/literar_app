@@ -14,7 +14,8 @@ const Post = ({ post }) => {
     const getUserInfo = async () => {
       try {
         const response = await getUserData(post.userId)
-        console.log(response.data.userInfo)
+        //console.log(response.data.userInfo)
+        setUser(response.data.userInfo)
 
       } catch (error) {
         console.error('Erro ao buscar dados de usuario:', error);
@@ -82,8 +83,8 @@ const Post = ({ post }) => {
             className="w-12 h-12 rounded-full object-cover" // Classe para imagem redonda
           />
           <h2 className="text-xl sm:text-2xl font-semibold text-center sm:text-left">
-            <Link to={`/profile/${post.userName}`} className="text-indigo-600 hover:text-indigo-800">
-              Post de {post.userName}
+            <Link to={`/profile/${user.username}`} className="text-indigo-600 hover:text-indigo-800">
+              Post de {user.username}
             </Link>
           </h2>
         </div>

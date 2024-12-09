@@ -5,7 +5,8 @@ import {
     LikeAndDislikeController, 
     getPostController,
     updatePostController, 
-    getTimelinePostController
+    getTimelinePostController,
+    getAllPostsController
 } from "../controllers/postController.js";
 
 const router = express.Router();
@@ -20,8 +21,13 @@ router.delete("/delete-post/:id", deletePostController);
 router.put("/like-post/:id", LikeAndDislikeController);
 // get post
 router.get("/get-post/:id", getPostController);
+
+//get all posts
+router.get("/", getAllPostsController);
+
+
 // get timelineposts
-router.get("/get-timeline-posts/:userId", getTimelinePostController);
+router.get("/get-timeline-posts/:username", getTimelinePostController);
 
 
 export default router;
