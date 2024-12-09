@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-<<<<<<< HEAD
 import Header from '../header/Header';
 import { useNavigate } from 'react-router-dom'; // Para redirecionar após login
-=======
-import Footer from '../footer/footer';
->>>>>>> 9d3c899bacb6c2a309d50d346826e1fb53a5d844
+import Footer from '../footer/Footer';
 
 const Login = () => {
   const [auth, setAuth] = useState({
