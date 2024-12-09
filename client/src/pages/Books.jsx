@@ -23,6 +23,8 @@ const Books = () => {
   const [books, setBooks] = useState([]); // Estado para armazenar todos os livros
   const [visibleBooks, setVisibleBooks] = useState(24); // Controla quantos livros estão visíveis
   const [loading, setLoading] = useState(true); // Estado de carregamento
+  const [searchTerm, setSearchTerm] = useState(''); // Novo estado para armazenar o termo de pesquisa
+  const [searchActive, setSearchActive] = useState(false); // Controla se a pesquisa foi ativada
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -43,8 +45,27 @@ const Books = () => {
 
     fetchBooks();
   }, []);
+  // Função segura para garantir que o valor é uma string antes de chamar toLowerCase()
+  const toLowerSafe = (value) => {
+    return value && typeof value === 'string' ? value.toLowerCase() : '';
+  };
 
-  // Carrega mais 8 livros na página
+  // Função de filtro que será acionada após o botão de pesquisa ser pressionado
+  const handleSearch = () => {
+    setSearchActive(true);
+  };
+
+  // Filtra os livros com base no termo de busca
+  const filteredBooks = searchActive
+    ? books.filter((book) => {
+        const titleMatch = toLowerSafe(book.titulo).includes(toLowerSafe(searchTerm));
+        const authorMatch = toLowerSafe(book.autor).includes(toLowerSafe(searchTerm));
+        return titleMatch || authorMatch; // Retorna true se algum dos campos corresponder
+      })
+    : books; // Se a pesquisa não estiver ativa, mostra todos os livros
+  
+  
+    // Carrega mais 8 livros na página
   const loadMoreBooks = () => {
     setVisibleBooks((prev) => prev + 8);
   };
@@ -54,7 +75,24 @@ const Books = () => {
       <Header />
       <main className="flex-grow container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-6 text-center">Biblioteca</h1>
-
+        
+         {/* Barra de pesquisa */}
+         <div className="mb-6 flex justify-center">
+          <input
+            type="text"
+            placeholder="Buscar por título ou autor..."
+            className="w-1/2 p-2 border border-gray-300 rounded-lg"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)} // Atualiza o estado de pesquisa
+          />
+          <button
+            onClick={handleSearch} // Ativa a pesquisa quando o botão é pressionado
+            className="ml-2 px-4 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 transition"
+          >
+            Buscar
+          </button>
+        </div>
+        
         {loading ? (
           // Mensagem de carregamento
           <p className="text-center">Carregando livros...</p>
